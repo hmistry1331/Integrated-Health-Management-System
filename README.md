@@ -1,6 +1,7 @@
 # Integrated-Health-Management-
 
 Objective: 
+
 The Integrated Health Management System (IHMS) is a centralized 
 platform designed to streamline healthcare services by efficiently 
 managing patient data, medical histories, doctor consultations, and 
@@ -8,7 +9,8 @@ personalized health recommendations. The system focuses not only
 on diagnosing and treating diseases but also on promoting overall 
 well-being through food and lifestyle recommendations.  
 
-A classic scenario of how the system works: 
+A classic scenario of how the system works:
+
 When a patient visits the Integrated Health Management System (IHMS), they 
 are first asked to provide basic health-related details such as sugar level, blood 
 pressure, and other vital signs. The system then evaluates this data against 
