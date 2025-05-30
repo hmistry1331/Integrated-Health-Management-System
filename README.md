@@ -1,4 +1,4 @@
-# Integrated-Health-Management-
+# Integrated-Health-Management-System
 
 Objective: 
 
