@@ -1,0 +1,121 @@
+-- Patient table
+CREATE TABLE Patient (
+    Patient_ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Age INT,
+    Gender CHAR(1),
+    City VARCHAR(255),
+    Postal_code INT,
+    House_no INT
+);
+
+-- Doctor table
+CREATE TABLE Doctor (
+    Doctor_ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Specialty VARCHAR(50),
+    Contact_Information VARCHAR(15),
+    Experience INT
+);
+
+-- Medicine table
+CREATE TABLE Medicine (
+    Medicine_ID INT PRIMARY KEY,
+    Detail_ID INT,
+    Name VARCHAR(100),
+    Dosage VARCHAR(50),
+    Expiry_Date DATE
+);
+
+-- Appointment table
+CREATE TABLE Appointment (
+    Appointment_ID INT PRIMARY KEY,
+    Patient_ID INT,
+    Doctor_ID INT,
+    AppointmentDate DATE,
+    Status VARCHAR(20),
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID),
+    FOREIGN KEY (Doctor_ID) REFERENCES Doctor(Doctor_ID)
+);
+
+-- Prescription table
+CREATE TABLE Prescription (
+    Prescription_ID INT PRIMARY KEY,
+    Appointment_ID INT,
+    Medicine_ID INT,
+    Dosage VARCHAR(50),
+    Duration_Days INT,
+    Instructions TEXT,
+    FOREIGN KEY (Appointment_ID) REFERENCES Appointment(Appointment_ID),
+    FOREIGN KEY (Medicine_ID) REFERENCES Medicine(Medicine_ID)
+);
+
+-- Side Effects table
+CREATE TABLE Side_Effects (
+    Medicine_ID INT PRIMARY KEY,
+    Side_Effects TEXT,
+    FOREIGN KEY (Medicine_ID) REFERENCES Medicine(Medicine_ID)
+);
+
+-- Health_Data table
+CREATE TABLE Health_Data (
+    Data_ID INT PRIMARY KEY,
+    Patient_ID INT,
+    Blood_Pressure VARCHAR(10),
+    Heart_Rate INT,
+    Sugar_Level DECIMAL(5,2),
+    Other_Health_Metrics TEXT,
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID)
+);
+
+-- Diet table
+CREATE TABLE Diet (
+    Diet_ID INT PRIMARY KEY,
+    Diet_Type VARCHAR(100),
+    Nutrition_Details TEXT
+);
+
+-- Food_Items table
+CREATE TABLE Food_Items (
+    Food_ID INT PRIMARY KEY,
+    Name TEXT
+);
+
+-- Diet-Food junction table
+CREATE TABLE Diet_Food (
+    Diet_ID INT,
+    Food_ID INT,
+    PRIMARY KEY (Diet_ID, Food_ID),
+    FOREIGN KEY (Diet_ID) REFERENCES Diet(Diet_ID),
+    FOREIGN KEY (Food_ID) REFERENCES Food_Items(Food_ID)
+);
+
+-- Health_Records table
+CREATE TABLE Health_Records (
+    Patient_ID INT,
+    Doctor_ID INT,
+    Appointment_ID INT,
+    Previous_Diagnosis TEXT,
+    Treatment_Received TEXT,
+    Allergies TEXT,
+    DietID INT,
+    PRIMARY KEY (Patient_ID, Doctor_ID, Appointment_ID),
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID),
+    FOREIGN KEY (Doctor_ID) REFERENCES Doctor(Doctor_ID),
+    FOREIGN KEY (Appointment_ID) REFERENCES Appointment(Appointment_ID),
+    FOREIGN KEY (DietID) REFERENCES Diet(Diet_ID)
+);
+
+-- Patient Contact Info
+CREATE TABLE Patient_contact_information (
+    Patient_ID INT PRIMARY KEY,
+    Contact_information VARCHAR(15),
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID)
+);
+
+-- Doctor Contact Info
+CREATE TABLE Doctor_contact_information (
+    Doctor_ID INT PRIMARY KEY,
+    Contact_information VARCHAR(15),
+    FOREIGN KEY (Doctor_ID) REFERENCES Doctor(Doctor_ID)
+);
